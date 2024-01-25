@@ -23,6 +23,7 @@
       <div class="container-bottom">
         <el-card
           class="card-style card-button"
+          :class="{ 'disabled-button': disableButton }"
           shadow="always"
           header="MBT"
           @click.native="gotToResult('mbt')"
@@ -31,6 +32,7 @@
         </el-card>
         <el-card
           class="card-style card-button"
+          :class="{ 'disabled-button': disableButton }"
           shadow="always"
           header="SAP"
           @click.native="gotToResult('sap')"
@@ -56,8 +58,16 @@
         lowerValue: '',
       }
     },
+    computed: {
+      disableButton() {
+        return !(this.upperValue.length && this.lowerValue.length);
+      }
+    },
     methods: {
       gotToResult(chartType) {
+        if (this.disableButton) {
+          return;
+        }
         this.$router.push({
           path: '/result',
           query: {
@@ -75,25 +85,26 @@
   height: 40%;
 }
 .container-middle, .container-bottom {
-  height: 15%;
+  height: 30%;
 }
 .container-top, .container-middle, .container-bottom {
-    /* height: 50%; */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
-/* .container-top > .card-style {
-  width: 70%;
-} */
 .card-style {
   width: 70%;
-  /* border: 2px solid darkred; */
   border-radius: 20px;
   background-color: darkslategrey;
   padding: 10px 0;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.disabled-button {
+  cursor:not-allowed!important;
+  background-color: lightgrey;
+  color: grey;
 }
 .card-input {
   width: 50%;
@@ -105,13 +116,11 @@
 }
 .card-style > .el-card__header {
   font-size: 40px;
-  color: white;
   font-weight: 600;
 }
 
 .card-input > .el-card__header {
   font-size: 16px;
-  color: white;
   font-weight: 600;
   margin-bottom: 10px;
 }
@@ -123,7 +132,6 @@
 }
 .card-style > .el-card__body {
   font-size: 20px;
-  color: white;
 }
 .container-bottom > div:nth-child(1) {
   position: fixed;
@@ -138,7 +146,7 @@
 }
 .upper-text > input, .lower-text > input {
   border: none;
-  background-color: orangered;
+  background-color: #d24d57;
   text-align: center;
   color: white;
 }
@@ -164,7 +172,7 @@ input[type=text]:focus {
 }
 
 .hexagon {
-  background-color: orangered;
+  background-color: #d24d57;
   width: 70%;
   -webkit-clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
   clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
