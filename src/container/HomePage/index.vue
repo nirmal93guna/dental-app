@@ -13,7 +13,7 @@
         <el-card
           class="card-style card-input"
           shadow="always"
-          header="Tooth Measurement (Canine)">
+          header="Tooth Measurement (MBT - 1st premolar | SAP - Canine)">
             <div class="hexagon">
               <el-input class="upper-text" type="text" placeholder="Upper" v-model="upperValue"></el-input>
               <el-input class="lower-text" type="text" placeholder="Lower" v-model="lowerValue"></el-input>
